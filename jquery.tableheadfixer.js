@@ -73,10 +73,10 @@
 
                 var top = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
                 if(window.self !== window.top){
-                	top = Math.max(window.top.document.body.scrollTop, window.top.document.documentElement.scrollTop);
+                	top = Math.max(window.top.document.body.scrollTop, window.top.document.documentElement.scrollTop) - 15;
                 }
                 var left = Math.max(document.body.scrollLeft, document.documentElement.scrollLeft),
-                   topValue = (top > offset.top) ? (top - offset.top - 1) : 0;
+                   topValue = (top > offset.top) ? (top - offset.top) : 0;
                 //console.log(table.offset())
 
                 th.css({
