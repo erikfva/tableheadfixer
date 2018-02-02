@@ -71,6 +71,7 @@
                     //'position'          : 'relative',
                     //'top'               : topValue,
                     'transform'         : 'translate(0, '+ (topValue) +'px)',
+                    'box-shadow' : topValue > 0? '0 12px 15px 0 rgba(0,0,0,.24), 0 17px 50px 0 rgba(0,0,0,.19)' : 'none',
                     /*'background-color'  : options.bgColor,*/
                     'z-index'           : options['z-index']
                 });
