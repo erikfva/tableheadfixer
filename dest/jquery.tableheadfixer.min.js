@@ -39,7 +39,7 @@
             		}
 
                 // 添加屏幕滚动事件监听器
-                $(window).on('scroll', function() {
+                $(options.container || window).on('scroll', function() {
                     fixHead();
                 });
 
@@ -56,8 +56,6 @@
 
             function fixHead() {
               var offset      =  table.offset();
-              //console.log(window.parent.jQuery(window.frameElement).offset().top, window.top.document.body.scrollTop, window.top.document.documentElement.scrollTop )
-              	
 
                 var top = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
                 if(window.self !== window.top){
@@ -65,7 +63,6 @@
                 }
                 var left = Math.max(document.body.scrollLeft, document.documentElement.scrollLeft),
                    topValue = (top > offset.top) ? (top - offset.top) : 0;
-                //console.log(table.offset())
 
                 th.css({
                     //'position'          : 'relative',
