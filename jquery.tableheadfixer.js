@@ -63,7 +63,9 @@
                 }
                 var left = Math.max(document.body.scrollLeft, document.documentElement.scrollLeft),
                    topValue = (top > offset.top) ? (top - offset.top) : 0;
-
+                if(typeof options.beforeTransform == 'function' ){
+                    topValue = options.beforeTransform(topValue);
+                }
                 th.css({
                     //'position'          : 'relative',
                     //'top'               : topValue,
