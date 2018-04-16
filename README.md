@@ -5,7 +5,7 @@ JQuery plugin to fix table header on top when windows scroll hide the head
 `npm i tableheadfixer`
 
 ### Use
-`
+
     require('tableheadfixer');
 
     if (typeof $ === "function") {//If jQuery load?     
@@ -26,4 +26,3 @@ JQuery plugin to fix table header on top when windows scroll hide the head
             });
         }
     }
-`
