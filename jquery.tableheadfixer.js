@@ -6,7 +6,19 @@
  * Licensed under the MIT license.
  */
 
-;(function($) {
+// UMD (Universal Module Definition) patterns for JavaScript modules that work everywhere.
+// https://github.com/umdjs/umd/blob/master/templates/jqueryPlugin.js
+(function (factory, jQuery, Zepto) {
+
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory(require('jquery'));
+    } else {
+        factory(jQuery || Zepto);
+    }
+
+}(function($) {
 
     'use strict';
 
@@ -82,4 +94,4 @@
 
     });
 
-})(jQuery);
+}, window.jQuery, window.Zepto));
