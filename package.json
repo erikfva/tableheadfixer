@@ -1,6 +1,6 @@
 {
   "name": "tableheadfixer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "JQuery plugin to fix table header on top when windows scroll hide the head.",
   "main": "jquery.tableheadfixer.js",
   "scripts": {
