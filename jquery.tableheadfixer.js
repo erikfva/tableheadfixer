@@ -79,7 +79,7 @@
                     topValue = options.beforeTransform(topValue);
                 }
                 th.css({
-                    'position'          : 'absolute',
+                    //'position'          : 'absolute',
                     //'top'               : topValue,
                     'transform'         : 'translate(0, '+ (topValue) +'px) translateZ( 5px )',
                     'box-shadow' : topValue > 0? '0 12px 15px 0 rgba(0,0,0,.24), 0 17px 50px 0 rgba(0,0,0,.19)' : 'none',
