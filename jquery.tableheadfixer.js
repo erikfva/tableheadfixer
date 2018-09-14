@@ -69,12 +69,20 @@
             function fixHead() {
               var offset      =  table.offset();
 
-                var top = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+                var wtop = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
                 if(window.self !== window.top){
-                	top = Math.max(window.top.document.body.scrollTop, window.top.document.documentElement.scrollTop) - 1;
+                	wtop = Math.max(window.top.document.body.scrollTop, window.top.document.documentElement.scrollTop) - 1;
                 }
                 var left = Math.max(document.body.scrollLeft, document.documentElement.scrollLeft),
-                   topValue = (top > offset.top) ? (top - offset.top) : 0;
+                topValue = (wtop > offset.top) ? (wtop - offset.top) : 0;
+                if(window.parent){
+                    var iframeY = $(window.frameElement).offset().top;
+
+                    if( window.top.document.body.scrollTop >= (iframeY +offset.top ) )
+                        topValue = topValue - iframeY
+                    else
+                        topValue =  0;
+                }   
                 if(typeof options.beforeTransform == 'function' ){
                     topValue = options.beforeTransform(topValue);
                 }
