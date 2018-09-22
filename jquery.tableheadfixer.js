@@ -76,12 +76,17 @@
                 var left = Math.max(document.body.scrollLeft, document.documentElement.scrollLeft),
                 topValue = (wtop > offset.top) ? (wtop - offset.top) : 0;
                 if(window.parent){
-                    var iframeY = $(window.frameElement).offset().top;
-
-                    if( window.top.document.body.scrollTop >= (iframeY +offset.top ) )
-                        topValue = topValue - iframeY
-                    else
-                        topValue =  0;
+                    var iframeY = window.frameElement? $(window.frameElement).offset().top : 0;
+                    
+                    if(window.parent.frameElement){
+                        iframeY = iframeY + $(window.parent.frameElement).offset().top;
+                        if( window.top.document.body.scrollTop >= (iframeY +offset.top ) ){
+                            topValue = topValue - iframeY;
+                             
+                         }                      
+                         else
+                             topValue =  0;
+                    }
                 }   
                 if(typeof options.beforeTransform == 'function' ){
                     topValue = options.beforeTransform(topValue);
@@ -89,6 +94,7 @@
                 th.css({
                     //'position'          : 'absolute',
                     //'top'               : topValue,
+                    'transform-style': 'flat',
                     'transform'         : 'translate(0, '+ (topValue) +'px) translateZ( 5px )',
                     'box-shadow' : topValue > 0? '0 12px 15px 0 rgba(0,0,0,.24), 0 17px 50px 0 rgba(0,0,0,.19)' : 'none',
                     /*'background-color'  : options.bgColor,*/
