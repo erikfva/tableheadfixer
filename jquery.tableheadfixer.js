@@ -45,9 +45,13 @@
 
             } else {
             		if(window.self !== window.top){
-            			$(window.top).on('scroll', function() {
-                    fixHead();
-                	});
+                        try { //fix: cross domain error
+                            $(window.top).on('scroll', function() {
+                                fixHead();
+                            })
+                        } catch(e) {
+                            //alert(e); // Security Error (another origin)
+                        }
             		}
 
                 // 添加屏幕滚动事件监听器
@@ -70,9 +74,14 @@
               var offset      =  table.offset();
 
                 var wtop = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
-                if(window.self !== window.top){
-                	wtop = Math.max(window.top.document.body.scrollTop, window.top.document.documentElement.scrollTop) - 1;
+
+                try{ //fix: cross domain
+                    if(window.self !== window.top){
+                        wtop = Math.max(window.top.document.body.scrollTop, window.top.document.documentElement.scrollTop) - 1;
+                    }
+                } catch(e) {
                 }
+
                 var left = Math.max(document.body.scrollLeft, document.documentElement.scrollLeft),
                 topValue = (wtop > offset.top) ? (wtop - offset.top) : 0;
                 if(window.parent){
@@ -80,12 +89,15 @@
                     
                     if(window.parent.frameElement){
                         iframeY = iframeY + $(window.parent.frameElement).offset().top;
-                        if( window.top.document.body.scrollTop >= (iframeY +offset.top ) ){
-                            topValue = topValue - iframeY;
-                             
-                         }                      
-                         else
-                             topValue =  0;
+                        try{ //Fix : cross domain
+                            if( window.top.document.body.scrollTop >= (iframeY +offset.top ) ){
+                                topValue = topValue - iframeY;
+                                 
+                            }                      
+                            else
+                                topValue =  0;
+                        } catch(e) {
+                        }
                     }
                 }   
                 if(typeof options.beforeTransform == 'function' ){
